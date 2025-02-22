@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice To Text</title>
+    <link rel="icon" href="mic.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h2>Voice To Text Converter</h2>
+            <div class="text-area">
+                <textarea id="textOutput" placeholder="Your speech will appear here..."></textarea>
+            </div>
+            <button onclick="startRecognition()">
+                <img src="mic.png" alt="Mic"> Start Recording
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function startRecognition() {
+            var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.interimResults = true; 
+            
+            recognition.onresult = function(event) {
+                document.getElementById('textOutput').value = event.results[0][0].transcript;
+            };
+
+            recognition.start();
+        }
+    </script>
+</body>
+</html>
+
